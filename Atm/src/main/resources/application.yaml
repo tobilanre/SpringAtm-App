@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  error:
+    include-exception: on
+    include-stacktrace: never
+spring:
+#  main:
+#  banner-mode: off
+  application:
+    name: atm-backend
+  datasource:
+    url: jdbc:mysql://localhost:3306/atmdb?createDatabaseIfNotExist=true&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: password
+    platform: mysql
+    initialization-mode: always
+    continue-on-error: true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    data:
+      classpath: db/*.sql
+  jpa:
+    show-sql: on
+    generate-ddl: on
+    hibernate:
+      ddl-auto: create-drop
+    properties.hibernate:
+      format_sql: true
+      use_sql_comments: true
+      dialect : org.hibernate.dialect.MySQL5InnoDBDialect
+springdoc:
+  override-with-generic-response: false
+  default-produces-media-type: application/json
+  pathsToMatch: /atm/**
+  swagger-ui:
+      path: /swagger-ui-custom.html
+  api-docs:
+    path: /api-docs
+logging:
+level:
+  root: off
+  sql: trace
+  org.springframework.jdbc.datasource: trace
